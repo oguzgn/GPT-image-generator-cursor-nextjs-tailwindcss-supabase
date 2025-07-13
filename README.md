@@ -1,0 +1,1 @@
+# GPT-image-generator-cursor-nextjs-tailwindcss-supabase
