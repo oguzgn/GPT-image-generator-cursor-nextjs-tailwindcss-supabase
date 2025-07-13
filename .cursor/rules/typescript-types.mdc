@@ -1,0 +1,170 @@
+---
+globs: *.tsx,*.ts
+alwaysApply: false
+---
+# TypeScript Project Structure & Type Organization Rules
+
+## 1. Modular Architecture
+- **Organize by feature/domain, not by technical type.**
+  - Keep related components, hooks, and types together in a folder.
+  - Example:
+    ```
+    src/components/Button/Button.tsx
+    src/components/Button/types.ts
+    ```
+
+## 2. Consistent Naming
+- **Use clear, consistent file and folder names.**
+  - Components: `Button.tsx`
+  - Types: `types.ts` or `button.types.ts` (inside the component folder)
+
+## 3. Flat Structure
+- **Avoid deep nesting.**
+  - Maximum 3 levels deep for folders.
+  - Example:
+    ```
+    src/components/Button/Button.tsx
+    src/components/Header/Header.tsx
+    src/types/user.ts
+    ```
+
+## 4. Where to Place Types
+- **Component-Specific Types:**
+  - If a type is only used by one component, define it in the same file or in a `types.ts` file in the component's folder.
+  - Example:
+    ```typescript
+    // src/components/Button/types.ts
+    export interface ButtonProps {
+      label: string;
+      onClick: () => void;
+      disabled?: boolean;
+    }
+    ```
+- **Shared Types:**
+  - If a type is used in multiple places, put it in `src/types/`.
+  - Example:
+    ```typescript
+    // src/types/user.ts
+    export interface User {
+      id: number;
+      name: string;
+      email: string;
+    }
+    ```
+
+## 5. TypeScript Declarations and Modules
+- **Use ES modules (import/export), not TypeScript namespaces.**
+- **Export interfaces and types for reuse.**
+
+## 6. Typing React Components
+- **Always type props and state.**
+  - Use interfaces or type aliases.
+- **Use generics for reusable components.**
+- **React.FC is optional.**
+  - Prefer explicit typing for children if more control is needed.
+
+## 7. Additional Best Practices
+- **Enable strict mode** in `tsconfig.json` (`"strict": true`).
+- **Avoid `any`**; use specific types.
+- **Use utility types** (`Partial`, `Pick`, etc.) to avoid repetition.
+- **Keep types DRY**; import and reuse types instead of redefining.
+
+## Example Project Structure
+```
+src/
+  components/
+    Button/
+      Button.tsx
+      types.ts
+    Header/
+      Header.tsx
+      types.ts
+  types/
+    user.ts
+    api.ts
+  utils/
+    formatDate.ts
+```
+# TypeScript Project Structure & Type Organization Rules
+
+## 1. Modular Architecture
+- **Organize by feature/domain, not by technical type.**
+  - Keep related components, hooks, and types together in a folder.
+  - Example:
+    ```
+    src/components/Button/Button.tsx
+    src/components/Button/types.ts
+    ```
+
+## 2. Consistent Naming
+- **Use clear, consistent file and folder names.**
+  - Components: `Button.tsx`
+  - Types: `types.ts` or `button.types.ts` (inside the component folder)
+
+## 3. Flat Structure
+- **Avoid deep nesting.**
+  - Maximum 3 levels deep for folders.
+  - Example:
+    ```
+    src/components/Button/Button.tsx
+    src/components/Header/Header.tsx
+    src/types/user.ts
+    ```
+
+## 4. Where to Place Types
+- **Component-Specific Types:**
+  - If a type is only used by one component, define it in the same file or in a `types.ts` file in the component's folder.
+  - Example:
+    ```typescript
+    // src/components/Button/types.ts
+    export interface ButtonProps {
+      label: string;
+      onClick: () => void;
+      disabled?: boolean;
+    }
+    ```
+- **Shared Types:**
+  - If a type is used in multiple places, put it in `src/types/`.
+  - Example:
+    ```typescript
+    // src/types/user.ts
+    export interface User {
+      id: number;
+      name: string;
+      email: string;
+    }
+    ```
+
+## 5. TypeScript Declarations and Modules
+- **Use ES modules (import/export), not TypeScript namespaces.**
+- **Export interfaces and types for reuse.**
+
+## 6. Typing React Components
+- **Always type props and state.**
+  - Use interfaces or type aliases.
+- **Use generics for reusable components.**
+- **React.FC is optional.**
+  - Prefer explicit typing for children if more control is needed.
+
+## 7. Additional Best Practices
+- **Enable strict mode** in `tsconfig.json` (`"strict": true`).
+- **Avoid `any`**; use specific types.
+- **Use utility types** (`Partial`, `Pick`, etc.) to avoid repetition.
+- **Keep types DRY**; import and reuse types instead of redefining.
+
+## Example Project Structure
+```
+src/
+  components/
+    Button/
+      Button.tsx
+      types.ts
+    Header/
+      Header.tsx
+      types.ts
+  types/
+    user.ts
+    api.ts
+  utils/
+    formatDate.ts
+```
