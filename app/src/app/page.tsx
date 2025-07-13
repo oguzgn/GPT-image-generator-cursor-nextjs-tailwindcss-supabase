@@ -1,10 +1,13 @@
+import { Button } from "@/components/ui/button";
+
 "use client";
 import React from "react";
 
-export default function ChatDemoPage() {
+export default function Home() {
   return (
-    <div className="min-h-screen flex bg-gray-50">
-      <h1>Welcome to the course!</h1>
-    </div>
+    <main>
+      <h1>Merhaba Oğuz!</h1>
+      <Button>Ben bir Shadcn Butonuyum</Button>
+    </main>
   );
 }

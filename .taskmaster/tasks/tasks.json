@@ -1,0 +1,722 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Setup NextJS Project with TypeScript",
+        "description": "Initialize the NextJS project with App Directory structure, TypeScript, and configure essential dependencies.",
+        "details": "1. Create a new NextJS project with App Directory structure:\n```bash\nnpx create-next-app@latest . --typescript --tailwind --app --eslint\n```\n2. Configure TypeScript settings in tsconfig.json for strict type checking\n3. Set up project structure with appropriate folders:\n   - app/ (for App Router)\n   - components/ (for UI components)\n   - lib/ (for utility functions)\n   - types/ (for TypeScript type definitions)\n4. Configure environment variables (.env.local, .env.example)\n5. Setup .gitignore for sensitive files\n6. Initialize package.json with required scripts (dev, build, start, lint)",
+        "testStrategy": "Verify project structure is correctly set up by running the development server and confirming it starts without errors. Check TypeScript configuration by introducing a deliberate type error and confirming it's caught during development.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Project initialization with NextJS",
+            "description": "Set up a new NextJS project with the appropriate flags for TypeScript, Tailwind, and App Router",
+            "dependencies": [],
+            "details": "1. Create a new NextJS project using the create-next-app command with appropriate flags:\n```bash\nnpx create-next-app@latest . --typescript --tailwind --app --eslint\n```\n2. Navigate to the project directory:\n```bash\ncd .\n```\n3. Install additional core dependencies:\n```bash\nnpm install next@latest react@latest react-dom@latest\n```\n4. Verify the installation by running the development server:\n```bash\nnpm run dev\n```",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "TypeScript configuration and type checking setup",
+            "description": "Configure TypeScript settings for strict type checking and optimal development experience",
+            "dependencies": [
+              1
+            ],
+            "details": "1. Review and update the generated tsconfig.json file with stricter settings:\n```json\n{\n  \"compilerOptions\": {\n    \"target\": \"es5\",\n    \"lib\": [\"dom\", \"dom.iterable\", \"esnext\"],\n    \"allowJs\": true,\n    \"skipLibCheck\": true,\n    \"strict\": true,\n    \"forceConsistentCasingInFileNames\": true,\n    \"noEmit\": true,\n    \"esModuleInterop\": true,\n    \"module\": \"esnext\",\n    \"moduleResolution\": \"bundler\",\n    \"resolveJsonModule\": true,\n    \"isolatedModules\": true,\n    \"jsx\": \"preserve\",\n    \"incremental\": true,\n    \"noUncheckedIndexedAccess\": true,\n    \"noImplicitAny\": true,\n    \"plugins\": [\n      {\n        \"name\": \"next\"\n      }\n    ],\n    \"paths\": {\n      \"@/*\": [\"./src/*\"]\n    }\n  },\n  \"include\": [\"next-env.d.ts\", \"**/*.ts\", \"**/*.tsx\", \".next/types/**/*.ts\"],\n  \"exclude\": [\"node_modules\"]\n}\n```\n2. Create a global.d.ts file for custom type declarations\n3. Install additional TypeScript development tools:\n```bash\nnpm install --save-dev typescript @types/react @types/node @types/react-dom\n```",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Project structure and folder organization",
+            "description": "Set up a scalable folder structure following NextJS best practices",
+            "dependencies": [
+              1
+            ],
+            "details": "1. Create the following directory structure:\n```\nsrc/\n  app/\n    (auth)/       # Authentication routes grouped\n    (dashboard)/  # Dashboard routes grouped\n    api/          # API routes\n    layout.tsx    # Root layout\n    page.tsx      # Home page\n  components/\n    ui/           # Reusable UI components\n    forms/        # Form-related components\n    layout/       # Layout components\n  lib/\n    utils.ts      # Utility functions\n    constants.ts  # Application constants\n  hooks/          # Custom React hooks\n  types/          # TypeScript type definitions\n  styles/         # Global styles\n  context/        # React context providers\n```\n2. Create placeholder files in each directory to maintain structure in git\n3. Set up barrel exports (index.ts) for component directories to simplify imports",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Environment and git configuration",
+            "description": "Configure environment variables and git settings for the project",
+            "dependencies": [
+              1
+            ],
+            "details": "1. Create environment variable files:\n```bash\ntouch .env.local .env.example\n```\n2. Add sample environment variables to .env.example:\n```\nNEXT_PUBLIC_API_URL=http://localhost:3000/api\nNEXT_PUBLIC_SITE_URL=http://localhost:3000\n```\n3. Update .gitignore to exclude sensitive files:\n```\n# dependencies\nnode_modules\n.pnp\n.pnp.js\n\n# testing\ncoverage\n\n# next.js\n.next/\nout/\n\n# production\nbuild\n\n# misc\n.DS_Store\n*.pem\n\n# debug\nnpm-debug.log*\nyarn-debug.log*\nyarn-error.log*\n\n# local env files\n.env*.local\n\n# vercel\n.vercel\n\n# typescript\n*.tsbuildinfo\nnext-env.d.ts\n```\n4. Initialize git repository and make initial commit:\n```bash\ngit init\ngit add .\ngit commit -m \"Initial NextJS project setup\"\n```\n5. Create a README.md with project setup instructions",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Configure TailwindCSS and ShadUI Components",
+        "description": "Set up TailwindCSS with proper configuration and install ShadUI component library for consistent UI elements.",
+        "details": "1. Install ShadUI and its dependencies:\n```bash\nnpm install @shadcn/ui\nnpx shadcn-ui init\n```\n2. Configure tailwind.config.js with appropriate theme settings:\n```js\nmodule.exports = {\n  darkMode: ['class'],\n  content: [\n    './pages/**/*.{ts,tsx}',\n    './components/**/*.{ts,tsx}',\n    './app/**/*.{ts,tsx}',\n  ],\n  theme: {\n    extend: {\n      colors: {\n        // Define custom colors here\n      },\n      fontFamily: {\n        // Define custom fonts here\n      }\n    }\n  },\n  plugins: [require('tailwindcss-animate')]\n}\n```\n3. Install and configure necessary ShadUI components:\n```bash\nnpx shadcn-ui add button\nnpx shadcn-ui add input\nnpx shadcn-ui add card\nnpx shadcn-ui add avatar\nnpx shadcn-ui add toggle\n```\n4. Create a theme provider component for consistent styling\n5. Set up global CSS file with TailwindCSS directives",
+        "testStrategy": "Create a test page with various ShadUI components to verify they render correctly. Check responsive behavior by testing in different viewport sizes. Validate that TailwindCSS utility classes are working as expected.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "TailwindCSS Installation and Theme Configuration",
+            "description": "Install TailwindCSS and configure the theme settings including colors, typography, and responsive design utilities",
+            "dependencies": [],
+            "details": "1. Install TailwindCSS and its dependencies:\n```bash\nnpm install -D tailwindcss postcss autoprefixer\nnpx tailwindcss init -p\n```\n2. Configure content paths in tailwind.config.js:\n```js\nmodule.exports = {\n  darkMode: ['class'],\n  content: [\n    './pages/**/*.{ts,tsx}',\n    './components/**/*.{ts,tsx}',\n    './app/**/*.{ts,tsx}',\n  ],\n  theme: {\n    extend: {\n      colors: {\n        // Custom color palette\n      },\n      fontFamily: {\n        // Custom font definitions\n      },\n      borderRadius: {\n        // Custom border radius values\n      }\n    }\n  },\n  plugins: []\n}\n```\n3. Create global CSS file with Tailwind directives:\n```css\n@tailwind base;\n@tailwind components;\n@tailwind utilities;\n```",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "ShadUI Component Library Setup and Initialization",
+            "description": "Install and initialize ShadUI component library with proper configuration for the project",
+            "dependencies": [
+              1
+            ],
+            "details": "1. Install ShadUI CLI tools:\n```bash\nnpm install @shadcn/ui\n```\n2. Initialize ShadUI with project configuration:\n```bash\nnpx shadcn-ui init\n```\n3. Configure the initialization options:\n   - Style preference (default/new/none)\n   - Color preference (slate/zinc/neutral/stone)\n   - Global CSS file location\n   - Components directory\n   - React Server Components support\n   - Tailwind CSS class sorting\n4. Update tailwind.config.js with ShadUI required plugins:\n```js\nplugins: [require(\"tailwindcss-animate\")]\n```",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Component Installation and Theme Provider Implementation",
+            "description": "Install specific ShadUI components and implement the theme provider for consistent styling across the application",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "1. Install required ShadUI components:\n```bash\nnpx shadcn-ui add button\nnpx shadcn-ui add input\nnpx shadcn-ui add toggle\n# Add other components as needed\n```\n2. Create a theme provider component:\n```tsx\n// components/ThemeProvider.tsx\nimport { ThemeProvider as NextThemesProvider } from 'next-themes'\nimport { type ThemeProviderProps } from 'next-themes/dist/types'\n\nexport function ThemeProvider({ children, ...props }: ThemeProviderProps) {\n  return <NextThemesProvider {...props}>{children}</NextThemesProvider>\n}\n```\n3. Implement the theme provider in the root layout:\n```tsx\n// app/layout.tsx\nimport { ThemeProvider } from '@/components/ThemeProvider'\n\nexport default function RootLayout({ children }) {\n  return (\n    <html lang=\"en\" suppressHydrationWarning>\n      <body>\n        <ThemeProvider attribute=\"class\" defaultTheme=\"system\" enableSystem>\n          {children}\n        </ThemeProvider>\n      </body>\n    </html>\n  )\n}\n```",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Setup Supabase Local Development Environment",
+        "description": "Configure Supabase CLI, set up local instance, and prepare the development environment for database and edge functions.",
+        "details": "1. Install Supabase CLI:\n```bash\nnpm install -g supabase\n```\n2. Initialize Supabase project:\n```bash\nsupabase init\n```\n3. Start local Supabase instance using Docker:\n```bash\nsupabase start\n```\n4. Configure environment variables for local development:\n```\nNEXT_PUBLIC_SUPABASE_URL=http://localhost:54321\nNEXT_PUBLIC_SUPABASE_ANON_KEY=<your-local-anon-key>\nSUPABASE_SERVICE_ROLE_KEY=<your-local-service-role-key>\n```\n5. Create a Supabase client utility in lib/supabase.ts:\n```typescript\nimport { createClient } from '@supabase/supabase-js';\n\nexport const supabase = createClient(\n  process.env.NEXT_PUBLIC_SUPABASE_URL!,\n  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!\n);\n```\n6. Set up folder structure for Supabase migrations and edge functions",
+        "testStrategy": "Verify Supabase local instance is running correctly by checking the local dashboard. Test the Supabase client connection by making a simple query. Confirm environment variables are properly loaded.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Install Supabase CLI and Initialize Project",
+            "description": "Install the Supabase CLI globally and initialize a new Supabase project in the application directory",
+            "dependencies": [],
+            "details": "1. Install Supabase CLI globally using npm: `npm install -g supabase`\n2. Navigate to your project directory\n3. Initialize a new Supabase project: `supabase init`\n4. Verify installation and initialization by checking for the creation of the supabase directory",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Configure and Start Local Docker Instance",
+            "description": "Set up and start the local Supabase Docker instance for development",
+            "dependencies": [
+              1
+            ],
+            "details": "1. Ensure Docker is installed and running on your system\n2. Start the local Supabase instance: `supabase start`\n3. Verify the local instance is running by accessing the local dashboard (typically at http://localhost:54323)\n4. Note the generated API URLs and keys displayed after successful startup",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Set Up Environment Variables and Create Client Utility",
+            "description": "Configure environment variables for Supabase connection and create a reusable client utility",
+            "dependencies": [
+              2
+            ],
+            "details": "1. Create or update .env.local with the following variables:\n   ```\n   NEXT_PUBLIC_SUPABASE_URL=http://localhost:54321\n   NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-local-anon-key>\n   SUPABASE_SERVICE_ROLE_KEY=<your-local-service-role-key>\n   ```\n2. Create a lib/supabase.ts file with a client utility:\n   ```typescript\n   import { createClient } from '@supabase/supabase-js';\n   \n   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;\n   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;\n   \n   export const supabase = createClient(supabaseUrl, supabaseAnonKey);\n   ```\n3. Test the client connection by making a simple query",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Create Database Schema and Migrations",
+        "description": "Implement the database schema for chat messages and sessions as specified in the PRD, and set up migrations for version control.",
+        "details": "1. Create a new migration file:\n```bash\nsupabase migration new create_chat_tables\n```\n2. Implement the SQL schema in the migration file:\n```sql\n-- Create chat_sessions table\nCREATE TABLE chat_sessions (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()\n);\n\n-- Create chat_messages table\nCREATE TABLE chat_messages (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  content TEXT NOT NULL,\n  role TEXT NOT NULL CHECK (role IN ('user', 'assistant')),\n  message_type TEXT NOT NULL CHECK (message_type IN ('text', 'image')),\n  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n  session_id UUID NOT NULL,\n  FOREIGN KEY (session_id) REFERENCES chat_sessions(id) ON DELETE CASCADE\n);\n\n-- Create indexes for performance\nCREATE INDEX idx_chat_messages_session_id ON chat_messages(session_id);\nCREATE INDEX idx_chat_messages_created_at ON chat_messages(created_at);\n```\n3. Apply the migration to the local database:\n```bash\nsupabase migration up\n```\n4. Create TypeScript types for database tables in types/database.ts:\n```typescript\nexport interface ChatSession {\n  id: string;\n  created_at: string;\n  updated_at: string;\n}\n\nexport interface ChatMessage {\n  id: string;\n  content: string;\n  role: 'user' | 'assistant';\n  message_type: 'text' | 'image';\n  created_at: string;\n  session_id: string;\n}\n```",
+        "testStrategy": "Verify the tables are created correctly by querying the database schema. Test CRUD operations on both tables to ensure constraints and relationships work as expected. Validate that the TypeScript types match the database schema.",
+        "priority": "high",
+        "dependencies": [
+          3
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Migration File and Setup",
+            "description": "Set up the migration system and create the initial migration file for the chat tables",
+            "dependencies": [],
+            "details": "Use the Supabase CLI to create a new migration file named 'create_chat_tables'. Set up the migration infrastructure if not already in place. Ensure the migration file is properly structured with up and down migrations.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement SQL Schema for chat_sessions Table",
+            "description": "Create the SQL schema for the chat_sessions table with appropriate columns and constraints",
+            "dependencies": [
+              1
+            ],
+            "details": "In the migration file, implement the CREATE TABLE statement for chat_sessions with UUID primary key, created_at and updated_at timestamps. Add appropriate indexes for query performance and any additional metadata fields needed for the chat sessions.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Implement SQL Schema for chat_messages Table",
+            "description": "Create the SQL schema for the chat_messages table with foreign key constraints to chat_sessions",
+            "dependencies": [
+              2
+            ],
+            "details": "Implement the CREATE TABLE statement for chat_messages with UUID primary key, content field, role field (user/assistant), foreign key reference to chat_sessions, timestamps, and any other required fields. Ensure proper constraints and indexes are added for data integrity and query performance.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Create TypeScript Type Definitions for Database Entities",
+            "description": "Define TypeScript interfaces that match the database schema for type safety in the application",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Create TypeScript interfaces for ChatSession and ChatMessage that accurately reflect the database schema. Include all fields with their proper types. Place these in a types/database.ts file for use throughout the application. Ensure the types are exported properly.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Implement Chat Interface Components",
+        "description": "Create the UI components for the chat interface, including message bubbles, input field, and scrollable container.",
+        "details": "1. Create a ChatContainer component:\n```tsx\n// components/chat/ChatContainer.tsx\nimport { useEffect, useRef } from 'react';\nimport { ChatMessage } from '@/types/database';\nimport MessageBubble from './MessageBubble';\n\ninterface ChatContainerProps {\n  messages: ChatMessage[];\n  loading: boolean;\n}\n\nexport default function ChatContainer({ messages, loading }: ChatContainerProps) {\n  const messagesEndRef = useRef<HTMLDivElement>(null);\n  \n  useEffect(() => {\n    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });\n  }, [messages]);\n\n  return (\n    <div className=\"flex-1 overflow-y-auto p-4 space-y-4\">\n      {messages.map((message) => (\n        <MessageBubble key={message.id} message={message} />\n      ))}\n      {loading && <MessageBubble message={{ role: 'assistant', content: '...', message_type: 'text' } as ChatMessage} loading={true} />}\n      <div ref={messagesEndRef} />\n    </div>\n  );\n}\n```\n\n2. Create a MessageBubble component:\n```tsx\n// components/chat/MessageBubble.tsx\nimport { ChatMessage } from '@/types/database';\nimport { Avatar } from '@/components/ui/avatar';\nimport { cn } from '@/lib/utils';\n\ninterface MessageBubbleProps {\n  message: ChatMessage;\n  loading?: boolean;\n}\n\nexport default function MessageBubble({ message, loading }: MessageBubbleProps) {\n  const isUser = message.role === 'user';\n  const isImage = message.message_type === 'image';\n  \n  return (\n    <div className={cn(\n      'flex items-start gap-2',\n      isUser ? 'flex-row-reverse' : 'flex-row'\n    )}>\n      <Avatar className={cn(\n        'w-8 h-8',\n        isUser ? 'bg-blue-500' : 'bg-gray-500'\n      )}>\n        {isUser ? 'U' : 'AI'}\n      </Avatar>\n      <div className={cn(\n        'rounded-lg p-3 max-w-[80%]',\n        isUser ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-800',\n        loading && 'animate-pulse'\n      )}>\n        {isImage ? (\n          <img src={message.content} alt=\"AI generated image\" className=\"rounded-md max-w-full\" />\n        ) : (\n          <p>{message.content}</p>\n        )}\n      </div>\n    </div>\n  );\n}\n```\n\n3. Create a ChatInput component:\n```tsx\n// components/chat/ChatInput.tsx\nimport { useState } from 'react';\nimport { Input } from '@/components/ui/input';\nimport { Button } from '@/components/ui/button';\nimport { Send } from 'lucide-react';\n\ninterface ChatInputProps {\n  onSendMessage: (message: string) => void;\n  disabled?: boolean;\n  placeholder?: string;\n}\n\nexport default function ChatInput({ onSendMessage, disabled, placeholder = 'Type a message...' }: ChatInputProps) {\n  const [input, setInput] = useState('');\n  \n  const handleSubmit = (e: React.FormEvent) => {\n    e.preventDefault();\n    if (input.trim()) {\n      onSendMessage(input.trim());\n      setInput('');\n    }\n  };\n  \n  return (\n    <form onSubmit={handleSubmit} className=\"p-4 border-t flex gap-2\">\n      <Input\n        value={input}\n        onChange={(e) => setInput(e.target.value)}\n        placeholder={placeholder}\n        disabled={disabled}\n        className=\"flex-1\"\n      />\n      <Button type=\"submit\" disabled={disabled || !input.trim()}>\n        <Send className=\"h-4 w-4\" />\n      </Button>\n    </form>\n  );\n}\n```\n\n4. Assemble the components in a ChatLayout component:\n```tsx\n// components/chat/ChatLayout.tsx\nimport { useState } from 'react';\nimport { ChatMessage } from '@/types/database';\nimport ChatContainer from './ChatContainer';\nimport ChatInput from './ChatInput';\n\ninterface ChatLayoutProps {\n  messages: ChatMessage[];\n  onSendMessage: (message: string) => void;\n  loading?: boolean;\n  mode: 'text' | 'image';\n}\n\nexport default function ChatLayout({ messages, onSendMessage, loading, mode }: ChatLayoutProps) {\n  return (\n    <div className=\"flex flex-col h-full\">\n      <ChatContainer messages={messages} loading={loading} />\n      <ChatInput \n        onSendMessage={onSendMessage} \n        disabled={loading} \n        placeholder={mode === 'text' ? 'Type a message...' : 'Describe the image you want to generate...'} \n      />\n    </div>\n  );\n}\n```",
+        "testStrategy": "Create a storybook or test page with mock data to verify all components render correctly. Test auto-scrolling behavior with many messages. Verify user and AI messages display with correct styling. Test input submission and validation. Check responsive behavior on different screen sizes.",
+        "priority": "high",
+        "dependencies": [
+          2
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement ChatContainer with Auto-scrolling",
+            "description": "Create a scrollable container component that automatically scrolls to the bottom when new messages are added",
+            "dependencies": [],
+            "details": "Develop the ChatContainer component with a scrollable message area. Implement auto-scrolling functionality using useRef and useEffect hooks to ensure the view stays at the bottom when new messages arrive. Add proper loading states and empty state handling. Include virtualization for performance with large message lists.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Create MessageBubble Component",
+            "description": "Design and implement a component for displaying different types of chat messages with appropriate styling",
+            "dependencies": [
+              1
+            ],
+            "details": "Build a MessageBubble component that handles different message types (text, image) and roles (user, assistant). Implement distinct styling for each message type and role. Add support for markdown rendering in text messages. Include proper image handling with loading states and error fallbacks for image messages.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Develop ChatInput Component",
+            "description": "Create an input component with form handling for submitting messages",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Implement a ChatInput component with a textarea/input field and submit button. Add form validation and handling to prevent empty submissions. Include character count and input limitations. Implement keyboard shortcuts (e.g., Enter to send, Shift+Enter for new line). Add loading state handling during message submission.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Build ChatLayout Component",
+            "description": "Create a layout component that integrates all chat interface components",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Develop a ChatLayout component that combines ChatContainer, MessageBubble, and ChatInput components. Implement proper state management for messages and loading states. Add context providers if needed for sharing state between components. Ensure proper spacing and layout of all elements within the chat interface.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement Responsive Design and Styling",
+            "description": "Refine the chat interface with responsive design and consistent styling across all components",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "Apply responsive design principles to ensure the chat interface works well on all device sizes. Implement media queries for different breakpoints. Add animations for message transitions and loading states. Ensure consistent styling with the design system. Optimize for mobile usage with appropriate touch targets and keyboard handling.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Implement Mode Toggle and New Chat Functionality",
+        "description": "Create components for toggling between text and image modes, and implement the New Chat functionality.",
+        "details": "1. Create a ModeToggle component:\n```tsx\n// components/chat/ModeToggle.tsx\nimport { Toggle } from '@/components/ui/toggle';\nimport { MessageSquare, Image } from 'lucide-react';\n\ninterface ModeToggleProps {\n  mode: 'text' | 'image';\n  onModeChange: (mode: 'text' | 'image') => void;\n}\n\nexport default function ModeToggle({ mode, onModeChange }: ModeToggleProps) {\n  return (\n    <div className=\"flex items-center gap-2 p-2\">\n      <Toggle\n        pressed={mode === 'text'}\n        onPressedChange={() => onModeChange('text')}\n        aria-label=\"Toggle text mode\"\n      >\n        <MessageSquare className=\"h-4 w-4 mr-1\" />\n        Text\n      </Toggle>\n      <Toggle\n        pressed={mode === 'image'}\n        onPressedChange={() => onModeChange('image')}\n        aria-label=\"Toggle image mode\"\n      >\n        <Image className=\"h-4 w-4 mr-1\" />\n        Image\n      </Toggle>\n    </div>\n  );\n}\n```\n\n2. Create a NewChatButton component:\n```tsx\n// components/chat/NewChatButton.tsx\nimport { Button } from '@/components/ui/button';\nimport { PlusCircle } from 'lucide-react';\n\ninterface NewChatButtonProps {\n  onNewChat: () => void;\n  disabled?: boolean;\n}\n\nexport default function NewChatButton({ onNewChat, disabled }: NewChatButtonProps) {\n  return (\n    <Button\n      variant=\"outline\"\n      onClick={onNewChat}\n      disabled={disabled}\n      className=\"flex items-center gap-2\"\n    >\n      <PlusCircle className=\"h-4 w-4\" />\n      New Chat\n    </Button>\n  );\n}\n```\n\n3. Create a ChatHeader component that combines these elements:\n```tsx\n// components/chat/ChatHeader.tsx\nimport ModeToggle from './ModeToggle';\nimport NewChatButton from './NewChatButton';\n\ninterface ChatHeaderProps {\n  mode: 'text' | 'image';\n  onModeChange: (mode: 'text' | 'image') => void;\n  onNewChat: () => void;\n  disabled?: boolean;\n}\n\nexport default function ChatHeader({ mode, onModeChange, onNewChat, disabled }: ChatHeaderProps) {\n  return (\n    <div className=\"border-b p-4 flex justify-between items-center\">\n      <h1 className=\"text-xl font-bold\">AI Chat</h1>\n      <div className=\"flex items-center gap-2\">\n        <ModeToggle mode={mode} onModeChange={onModeChange} />\n        <NewChatButton onNewChat={onNewChat} disabled={disabled} />\n      </div>\n    </div>\n  );\n}\n```\n\n4. Update the ChatLayout to include the header:\n```tsx\n// components/chat/ChatLayout.tsx\nimport { useState } from 'react';\nimport { ChatMessage } from '@/types/database';\nimport ChatContainer from './ChatContainer';\nimport ChatInput from './ChatInput';\nimport ChatHeader from './ChatHeader';\n\ninterface ChatLayoutProps {\n  messages: ChatMessage[];\n  onSendMessage: (message: string) => void;\n  onNewChat: () => void;\n  loading?: boolean;\n  mode: 'text' | 'image';\n  onModeChange: (mode: 'text' | 'image') => void;\n}\n\nexport default function ChatLayout({ \n  messages, \n  onSendMessage, \n  onNewChat,\n  loading, \n  mode,\n  onModeChange \n}: ChatLayoutProps) {\n  return (\n    <div className=\"flex flex-col h-full\">\n      <ChatHeader \n        mode={mode} \n        onModeChange={onModeChange} \n        onNewChat={onNewChat} \n        disabled={loading} \n      />\n      <ChatContainer messages={messages} loading={loading} />\n      <ChatInput \n        onSendMessage={onSendMessage} \n        disabled={loading} \n        placeholder={mode === 'text' ? 'Type a message...' : 'Describe the image you want to generate...'} \n      />\n    </div>\n  );\n}\n```",
+        "testStrategy": "Test mode toggle by switching between text and image modes and verifying the UI updates accordingly. Test new chat functionality by creating a chat, adding messages, then starting a new chat to verify the state resets correctly. Verify that the appropriate placeholder text appears based on the current mode.",
+        "priority": "medium",
+        "dependencies": [
+          5
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "ModeToggle Component Implementation",
+            "description": "Create a ModeToggle component that allows users to switch between text and image modes with proper state management",
+            "dependencies": [],
+            "details": "Implement the ModeToggle component with the following features:\n- Use the Toggle UI component to switch between text and image modes\n- Add icons (MessageSquare for text, Image for image mode)\n- Implement state management using React hooks\n- Add styling for active/inactive states\n- Ensure the component updates the global chat state when toggled",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "NewChatButton Component Implementation",
+            "description": "Create a NewChatButton component that resets the chat state and starts a new conversation",
+            "dependencies": [],
+            "details": "Implement the NewChatButton component with these features:\n- Create a button with appropriate styling\n- Add a 'plus' or similar icon to indicate new chat\n- Implement the reset functionality that clears current messages\n- Connect to the chat session management to create a new session\n- Add hover and active states for better UX\n- Include a confirmation if there are unsaved changes",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "ChatHeader Integration",
+            "description": "Integrate both ModeToggle and NewChatButton components into the ChatHeader",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Integrate the components into ChatHeader with these requirements:\n- Position the ModeToggle and NewChatButton in the header with proper spacing\n- Ensure responsive design works on different screen sizes\n- Pass the necessary props from parent components\n- Implement any required state lifting to ensure components work together\n- Add appropriate animations or transitions for mode changes\n- Ensure the header updates correctly based on current chat state",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Implement Supabase Edge Functions for OpenAI Integration",
+        "description": "Create Supabase Edge Functions to securely proxy requests to OpenAI's API for both text and image generation.",
+        "details": "1. Create an edge function for text generation:\n```bash\nsupabase functions new generate-text\n```\n\n2. Implement the text generation function:\n```typescript\n// supabase/functions/generate-text/index.ts\nimport { serve } from 'https://deno.land/std@0.168.0/http/server.ts';\nimport { OpenAI } from 'https://esm.sh/openai@4.0.0';\n\nconst openai = new OpenAI({\n  apiKey: Deno.env.get('OPENAI_API_KEY'),\n});\n\nserve(async (req) => {\n  try {\n    const { messages } = await req.json();\n    \n    // Validate input\n    if (!messages || !Array.isArray(messages)) {\n      return new Response(JSON.stringify({ error: 'Invalid messages format' }), {\n        status: 400,\n        headers: { 'Content-Type': 'application/json' },\n      });\n    }\n    \n    // Create a streaming response\n    const stream = await openai.chat.completions.create({\n      model: 'gpt-4.1-nano-2025-04-14',\n      messages,\n      stream: true,\n    });\n    \n    // Set up streaming response\n    const readableStream = new ReadableStream({\n      async start(controller) {\n        for await (const chunk of stream) {\n          const content = chunk.choices[0]?.delta?.content || '';\n          if (content) {\n            controller.enqueue(new TextEncoder().encode(`data: ${JSON.stringify({ content })}\\n\\n`));\n          }\n        }\n        controller.enqueue(new TextEncoder().encode('data: [DONE]\\n\\n'));\n        controller.close();\n      },\n    });\n    \n    return new Response(readableStream, {\n      headers: {\n        'Content-Type': 'text/event-stream',\n        'Cache-Control': 'no-cache',\n        'Connection': 'keep-alive',\n      },\n    });\n  } catch (error) {\n    return new Response(JSON.stringify({ error: error.message }), {\n      status: 500,\n      headers: { 'Content-Type': 'application/json' },\n    });\n  }\n});\n```\n\n3. Create an edge function for image generation:\n```bash\nsupabase functions new generate-image\n```\n\n4. Implement the image generation function:\n```typescript\n// supabase/functions/generate-image/index.ts\nimport { serve } from 'https://deno.land/std@0.168.0/http/server.ts';\nimport { OpenAI } from 'https://esm.sh/openai@4.0.0';\n\nconst openai = new OpenAI({\n  apiKey: Deno.env.get('OPENAI_API_KEY'),\n});\n\nserve(async (req) => {\n  try {\n    const { prompt } = await req.json();\n    \n    // Validate input\n    if (!prompt || typeof prompt !== 'string') {\n      return new Response(JSON.stringify({ error: 'Invalid prompt format' }), {\n        status: 400,\n        headers: { 'Content-Type': 'application/json' },\n      });\n    }\n    \n    // Generate image\n    const response = await openai.images.generate({\n      model: 'gpt-image-1',\n      prompt,\n      n: 1,\n      size: '1024x1024',\n    });\n    \n    const imageUrl = response.data[0]?.url;\n    \n    if (!imageUrl) {\n      throw new Error('Failed to generate image');\n    }\n    \n    return new Response(JSON.stringify({ imageUrl }), {\n      headers: { 'Content-Type': 'application/json' },\n    });\n  } catch (error) {\n    return new Response(JSON.stringify({ error: error.message }), {\n      status: 500,\n      headers: { 'Content-Type': 'application/json' },\n    });\n  }\n});\n```\n\n5. Deploy the functions locally for testing:\n```bash\nsupabase functions serve --no-verify-jwt\n```\n\n6. Create a .env.local file with the OpenAI API key for local development:\n```\nOPENAI_API_KEY=your_openai_api_key\n```",
+        "testStrategy": "Test the text generation function by sending sample messages and verifying streaming responses. Test the image generation function by sending various prompts and checking that valid image URLs are returned. Verify error handling by sending invalid requests. Test performance with different prompt lengths and complexity.",
+        "priority": "high",
+        "dependencies": [
+          3
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Text Generation Edge Function Setup",
+            "description": "Create and configure the Supabase Edge Function for text generation with OpenAI integration",
+            "dependencies": [],
+            "details": "1. Create a new edge function using the Supabase CLI command: `supabase functions new generate-text`\n2. Set up the basic structure with necessary imports (Deno serve, OpenAI client)\n3. Configure environment variables for secure API key storage\n4. Implement the basic request handler function structure\n5. Add CORS configuration for browser access",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Streaming Response Handling in Text Generation",
+            "description": "Implement streaming response functionality in the text generation edge function",
+            "dependencies": [
+              1
+            ],
+            "details": "1. Set up OpenAI API call with streaming option enabled\n2. Create a ReadableStream to handle the chunked responses\n3. Implement the stream transformer to process OpenAI chunks\n4. Configure proper content-type and headers for streaming\n5. Handle early client disconnections gracefully",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Image Generation Edge Function Implementation",
+            "description": "Create a separate edge function for handling image generation requests",
+            "dependencies": [
+              1
+            ],
+            "details": "1. Create a new edge function using: `supabase functions new generate-image`\n2. Implement the handler to accept image generation parameters\n3. Set up the OpenAI DALL-E API integration\n4. Configure response formatting to return image URLs\n5. Implement size and quality parameter handling",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Error Handling and Input Validation",
+            "description": "Add comprehensive error handling and input validation to both edge functions",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "1. Implement request body validation for both functions\n2. Add parameter constraints and sanitization\n3. Create standardized error response format\n4. Handle OpenAI API errors gracefully\n5. Implement rate limiting and request size validation",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Local Testing and Deployment Configuration",
+            "description": "Set up testing environment and deploy the edge functions to production",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "1. Configure local development environment with `supabase start`\n2. Create test scripts for both functions\n3. Set up production environment variables in Supabase dashboard\n4. Deploy functions using `supabase functions deploy`\n5. Document API endpoints and usage examples",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Implement Chat Session Management",
+        "description": "Create utilities and hooks for managing chat sessions, including creating, retrieving, and updating sessions in the database.",
+        "details": "1. Create a chat session service in lib/services/chatSessionService.ts:\n```typescript\nimport { supabase } from '@/lib/supabase';\nimport { ChatSession, ChatMessage } from '@/types/database';\n\nexport async function createChatSession(): Promise<ChatSession> {\n  const { data, error } = await supabase\n    .from('chat_sessions')\n    .insert({})\n    .select()\n    .single();\n  \n  if (error) throw new Error(`Failed to create chat session: ${error.message}`);\n  return data as ChatSession;\n}\n\nexport async function getChatSession(sessionId: string): Promise<ChatSession> {\n  const { data, error } = await supabase\n    .from('chat_sessions')\n    .select('*')\n    .eq('id', sessionId)\n    .single();\n  \n  if (error) throw new Error(`Failed to get chat session: ${error.message}`);\n  return data as ChatSession;\n}\n\nexport async function updateChatSessionTimestamp(sessionId: string): Promise<void> {\n  const { error } = await supabase\n    .from('chat_sessions')\n    .update({ updated_at: new Date().toISOString() })\n    .eq('id', sessionId);\n  \n  if (error) throw new Error(`Failed to update chat session: ${error.message}`);\n}\n\nexport async function getChatMessages(sessionId: string): Promise<ChatMessage[]> {\n  const { data, error } = await supabase\n    .from('chat_messages')\n    .select('*')\n    .eq('session_id', sessionId)\n    .order('created_at', { ascending: true });\n  \n  if (error) throw new Error(`Failed to get chat messages: ${error.message}`);\n  return data as ChatMessage[];\n}\n\nexport async function addChatMessage(message: Omit<ChatMessage, 'id' | 'created_at'>): Promise<ChatMessage> {\n  const { data, error } = await supabase\n    .from('chat_messages')\n    .insert(message)\n    .select()\n    .single();\n  \n  if (error) throw new Error(`Failed to add chat message: ${error.message}`);\n  return data as ChatMessage;\n}\n```\n\n2. Create a React hook for managing chat state in hooks/useChat.ts:\n```typescript\nimport { useState, useEffect, useCallback } from 'react';\nimport { ChatMessage } from '@/types/database';\nimport {\n  createChatSession,\n  getChatMessages,\n  addChatMessage,\n  updateChatSessionTimestamp\n} from '@/lib/services/chatSessionService';\n\nexport function useChat() {\n  const [sessionId, setSessionId] = useState<string | null>(null);\n  const [messages, setMessages] = useState<ChatMessage[]>([]);\n  const [loading, setLoading] = useState(false);\n  const [mode, setMode] = useState<'text' | 'image'>('text');\n  \n  // Initialize or load existing session\n  useEffect(() => {\n    const initSession = async () => {\n      try {\n        // Check for existing session in localStorage\n        const savedSessionId = localStorage.getItem('chatSessionId');\n        \n        if (savedSessionId) {\n          setSessionId(savedSessionId);\n          const chatMessages = await getChatMessages(savedSessionId);\n          setMessages(chatMessages);\n        } else {\n          // Create new session\n          const newSession = await createChatSession();\n          setSessionId(newSession.id);\n          localStorage.setItem('chatSessionId', newSession.id);\n        }\n      } catch (error) {\n        console.error('Failed to initialize chat session:', error);\n      }\n    };\n    \n    initSession();\n  }, []);\n  \n  // Start a new chat\n  const startNewChat = useCallback(async () => {\n    try {\n      setLoading(true);\n      const newSession = await createChatSession();\n      setSessionId(newSession.id);\n      localStorage.setItem('chatSessionId', newSession.id);\n      setMessages([]);\n    } catch (error) {\n      console.error('Failed to start new chat:', error);\n    } finally {\n      setLoading(false);\n    }\n  }, []);\n  \n  // Add a message to the chat\n  const addMessage = useCallback(async (content: string, role: 'user' | 'assistant', messageType: 'text' | 'image') => {\n    if (!sessionId) return;\n    \n    try {\n      const newMessage = await addChatMessage({\n        content,\n        role,\n        message_type: messageType,\n        session_id: sessionId\n      });\n      \n      setMessages(prev => [...prev, newMessage]);\n      await updateChatSessionTimestamp(sessionId);\n      return newMessage;\n    } catch (error) {\n      console.error('Failed to add message:', error);\n      return null;\n    }\n  }, [sessionId]);\n  \n  // Toggle between text and image modes\n  const toggleMode = useCallback((newMode: 'text' | 'image') => {\n    setMode(newMode);\n  }, []);\n  \n  return {\n    messages,\n    loading,\n    mode,\n    sessionId,\n    addMessage,\n    startNewChat,\n    toggleMode,\n    setLoading\n  };\n}\n```",
+        "testStrategy": "Test creating a new chat session and verifying it's stored in the database. Test retrieving messages for a session. Test adding messages of different types (text/image) and from different roles (user/assistant). Test the startNewChat functionality to ensure it creates a new session and clears messages. Verify mode toggling works correctly.",
+        "priority": "medium",
+        "dependencies": [
+          4
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Chat Session Service with CRUD Operations",
+            "description": "Create a service for managing chat sessions in the database with create, read, update, and delete operations.",
+            "dependencies": [],
+            "details": "1. Create chatSessionService.ts with functions for creating, retrieving, updating, and deleting chat sessions\n2. Implement createChatSession() to insert a new session in the database\n3. Implement getChatSession(id) to retrieve a specific session\n4. Implement updateChatSession(id, data) for updating session properties\n5. Implement deleteChatSession(id) for removing sessions\n6. Add functions for retrieving messages associated with a session\n7. Implement error handling for database operations",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Create React Hook for Session State Management",
+            "description": "Develop a custom React hook to manage chat session state in the frontend application.",
+            "dependencies": [
+              1
+            ],
+            "details": "1. Create useSession.ts hook to manage the current chat session state\n2. Implement state for the active session ID and session data\n3. Create functions to select, update, and reset the current session\n4. Add loading and error states for async operations\n5. Implement methods to interact with the chatSessionService\n6. Create event handlers for session switching\n7. Add TypeScript interfaces for session state management",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Implement Local Storage Integration for Session Persistence",
+            "description": "Add functionality to persist chat sessions in local storage to maintain state across page reloads.",
+            "dependencies": [
+              2
+            ],
+            "details": "1. Create a utility for saving session data to localStorage\n2. Implement functions to retrieve session history from localStorage\n3. Add synchronization between localStorage and database state\n4. Handle edge cases like storage limits and data corruption\n5. Implement session expiration logic\n6. Create migration strategy for older session formats\n7. Add clear functionality for user privacy",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Develop Session Initialization and Creation Logic",
+            "description": "Implement the logic for initializing the application with existing sessions or creating new ones when needed.",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "1. Create initialization flow to check for existing sessions on app load\n2. Implement startNewChat() functionality to create fresh sessions\n3. Add session metadata like creation time and title generation\n4. Create session restoration logic when returning to the application\n5. Implement session switching between existing conversations\n6. Add session cleanup for abandoned or empty sessions\n7. Create UI integration points for session management components",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Implement Text Chat with Streaming Responses",
+        "description": "Create the functionality for sending text messages to the OpenAI API and handling streaming responses.",
+        "details": "1. Create a utility for making API calls to the edge functions in lib/api.ts:\n```typescript\nexport async function streamTextCompletion(messages: any[]) {\n  const response = await fetch('/api/generate-text', {\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json',\n    },\n    body: JSON.stringify({ messages }),\n  });\n  \n  if (!response.ok) {\n    const error = await response.json();\n    throw new Error(error.message || 'Failed to generate text');\n  }\n  \n  return response.body;\n}\n\nexport async function generateImage(prompt: string) {\n  const response = await fetch('/api/generate-image', {\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json',\n    },\n    body: JSON.stringify({ prompt }),\n  });\n  \n  if (!response.ok) {\n    const error = await response.json();\n    throw new Error(error.message || 'Failed to generate image');\n  }\n  \n  const data = await response.json();\n  return data.imageUrl;\n}\n```\n\n2. Create a hook for handling text chat in hooks/useTextChat.ts:\n```typescript\nimport { useState, useCallback } from 'react';\nimport { streamTextCompletion } from '@/lib/api';\nimport { useChat } from './useChat';\n\nexport function useTextChat() {\n  const { messages, addMessage, setLoading } = useChat();\n  const [isStreaming, setIsStreaming] = useState(false);\n  \n  const sendMessage = useCallback(async (content: string) => {\n    if (!content.trim() || isStreaming) return;\n    \n    try {\n      // Add user message\n      await addMessage(content, 'user', 'text');\n      \n      // Prepare messages for API in the format OpenAI expects\n      const apiMessages = messages.map(msg => ({\n        role: msg.role,\n        content: msg.content\n      }));\n      apiMessages.push({ role: 'user', content });\n      \n      // Start streaming indicator\n      setIsStreaming(true);\n      setLoading(true);\n      \n      // Create a placeholder for the assistant's response\n      let assistantMessage = await addMessage('', 'assistant', 'text');\n      let fullResponse = '';\n      \n      // Get streaming response\n      const stream = await streamTextCompletion(apiMessages);\n      const reader = stream?.getReader();\n      \n      if (!reader) throw new Error('Failed to get stream reader');\n      \n      // Process the stream\n      while (true) {\n        const { done, value } = await reader.read();\n        if (done) break;\n        \n        // Parse the SSE data\n        const text = new TextDecoder().decode(value);\n        const lines = text.split('\\n\\n');\n        \n        for (const line of lines) {\n          if (line.startsWith('data: ')) {\n            const data = line.substring(6);\n            if (data === '[DONE]') break;\n            \n            try {\n              const parsed = JSON.parse(data);\n              if (parsed.content) {\n                fullResponse += parsed.content;\n                // Update the message in the database\n                assistantMessage = await addMessage(fullResponse, 'assistant', 'text');\n              }\n            } catch (e) {\n              console.error('Error parsing SSE data:', e);\n            }\n          }\n        }\n      }\n      \n      return assistantMessage;\n    } catch (error) {\n      console.error('Error in text chat:', error);\n      await addMessage('Sorry, there was an error processing your request.', 'assistant', 'text');\n    } finally {\n      setIsStreaming(false);\n      setLoading(false);\n    }\n  }, [messages, addMessage, isStreaming, setLoading]);\n  \n  return {\n    sendMessage,\n    isStreaming\n  };\n}\n```",
+        "testStrategy": "Test sending messages and receiving streaming responses. Verify that partial responses are displayed correctly as they arrive. Test error handling by simulating API failures. Verify that the complete message is stored in the database after streaming completes. Test with various message lengths and content types.",
+        "priority": "high",
+        "dependencies": [
+          7,
+          8
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement API utility for streaming text completion",
+            "description": "Create a utility function in lib/api.ts that handles the API call to the edge function and returns a readable stream for text completion",
+            "dependencies": [],
+            "details": "Implement the streamTextCompletion function that sends a request to the /api/generate-text endpoint and returns the response body as a readable stream. Include proper error handling for failed requests and type definitions for the parameters and return values.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Develop stream processing and parsing logic",
+            "description": "Create utilities to process the incoming stream data, parse SSE format, and extract completion chunks",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement functions to read from the stream, parse the Server-Sent Events format, and extract the completion text chunks. Handle different event types and ensure proper decoding of the streamed data. This should include logic to detect when the stream has ended.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Implement progressive UI updates during streaming",
+            "description": "Create a mechanism to update the UI in real-time as new chunks of text arrive from the stream",
+            "dependencies": [
+              2
+            ],
+            "details": "Modify the chat state management to support partial message updates. Implement a system that can append new chunks to the current assistant message as they arrive, triggering UI re-renders for each chunk while maintaining a smooth user experience.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Add error handling and recovery mechanisms",
+            "description": "Implement robust error handling for stream interruptions, API failures, and other edge cases",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Create error handling logic for various failure scenarios: network interruptions, API errors, malformed responses, and timeouts. Implement recovery mechanisms such as retries for failed requests and graceful degradation when streaming isn't available. Provide meaningful error messages to users.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement message persistence during and after streaming",
+            "description": "Ensure messages are properly saved to the database both during streaming and after completion",
+            "dependencies": [
+              3,
+              4
+            ],
+            "details": "Create a system to persist partial messages during streaming and update them when complete. Implement logic to handle database operations without blocking the UI updates. Ensure message history is consistent even if streaming is interrupted or fails.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Implement Image Generation Functionality",
+        "description": "Create the functionality for generating images using OpenAI's image generation API and displaying them in the chat interface.",
+        "details": "1. Create a hook for handling image generation in hooks/useImageGeneration.ts:\n```typescript\nimport { useCallback } from 'react';\nimport { generateImage } from '@/lib/api';\nimport { useChat } from './useChat';\n\nexport function useImageGeneration() {\n  const { addMessage, setLoading } = useChat();\n  \n  const generateImageFromPrompt = useCallback(async (prompt: string) => {\n    if (!prompt.trim()) return;\n    \n    try {\n      // Add user prompt to chat\n      await addMessage(prompt, 'user', 'text');\n      \n      // Set loading state\n      setLoading(true);\n      \n      // Add a placeholder message\n      await addMessage('Generating image...', 'assistant', 'text');\n      \n      // Generate the image\n      const imageUrl = await generateImage(prompt);\n      \n      // Remove the placeholder message\n      // This would require adding a function to delete messages in the chat service\n      \n      // Add the generated image to the chat\n      await addMessage(imageUrl, 'assistant', 'image');\n      \n      return imageUrl;\n    } catch (error) {\n      console.error('Error generating image:', error);\n      await addMessage('Sorry, there was an error generating the image.', 'assistant', 'text');\n    } finally {\n      setLoading(false);\n    }\n  }, [addMessage, setLoading]);\n  \n  return {\n    generateImageFromPrompt\n  };\n}\n```\n\n2. Create API routes to proxy the edge functions in app/api/generate-text/route.ts and app/api/generate-image/route.ts:\n\nFor text generation:\n```typescript\n// app/api/generate-text/route.ts\nimport { NextRequest, NextResponse } from 'next/server';\n\nexport async function POST(req: NextRequest) {\n  try {\n    const { messages } = await req.json();\n    \n    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;\n    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;\n    \n    if (!supabaseUrl || !supabaseKey) {\n      throw new Error('Missing Supabase credentials');\n    }\n    \n    const response = await fetch(`${supabaseUrl}/functions/v1/generate-text`, {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/json',\n        'Authorization': `Bearer ${supabaseKey}`\n      },\n      body: JSON.stringify({ messages })\n    });\n    \n    // Forward the streaming response\n    return new Response(response.body, {\n      headers: {\n        'Content-Type': 'text/event-stream',\n        'Cache-Control': 'no-cache',\n        'Connection': 'keep-alive'\n      }\n    });\n  } catch (error) {\n    return NextResponse.json({ error: error.message }, { status: 500 });\n  }\n}\n```\n\nFor image generation:\n```typescript\n// app/api/generate-image/route.ts\nimport { NextRequest, NextResponse } from 'next/server';\n\nexport async function POST(req: NextRequest) {\n  try {\n    const { prompt } = await req.json();\n    \n    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;\n    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;\n    \n    if (!supabaseUrl || !supabaseKey) {\n      throw new Error('Missing Supabase credentials');\n    }\n    \n    const response = await fetch(`${supabaseUrl}/functions/v1/generate-image`, {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/json',\n        'Authorization': `Bearer ${supabaseKey}`\n      },\n      body: JSON.stringify({ prompt })\n    });\n    \n    const data = await response.json();\n    return NextResponse.json(data);\n  } catch (error) {\n    return NextResponse.json({ error: error.message }, { status: 500 });\n  }\n}\n```",
+        "testStrategy": "Test image generation with various prompts and verify that images are correctly generated and displayed in the chat. Test error handling by simulating API failures. Verify that loading states are correctly managed during image generation. Test with different image descriptions to ensure the API handles various types of requests.",
+        "priority": "medium",
+        "dependencies": [
+          7,
+          8
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Image Generation Hook Implementation",
+            "description": "Create a React hook for handling image generation requests",
+            "dependencies": [],
+            "details": "Implement useImageGeneration.ts hook that will handle sending image generation requests, managing state, and integrating with the chat context. The hook should expose a function to generate images from text prompts and handle the response from the API.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "API Route for Proxying to Supabase Edge Function",
+            "description": "Create an API route that securely forwards image generation requests to Supabase",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement an API route at /api/generate-image that will proxy requests to the Supabase Edge Function. This should handle authentication, validation of the prompt, and proper error handling before forwarding to the edge function.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "UI Integration for Displaying Generated Images",
+            "description": "Implement UI components to display generated images in the chat interface",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Create or modify components to properly display generated images in the chat interface. This includes styling for image containers, handling different image sizes, and ensuring proper layout within the chat flow.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Loading State and Error Handling",
+            "description": "Implement loading indicators and error handling for the image generation process",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Add loading indicators during image generation, implement proper error handling for failed requests, and provide user feedback for various error states. Include retry functionality and appropriate error messages.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Create Main Chat Page and Layout",
+        "description": "Implement the main chat page that integrates all components and provides the complete user experience.",
+        "details": "1. Create the main page layout in app/page.tsx:\n```tsx\n'use client';\n\nimport { useEffect, useState } from 'react';\nimport ChatLayout from '@/components/chat/ChatLayout';\nimport { useChat } from '@/hooks/useChat';\nimport { useTextChat } from '@/hooks/useTextChat';\nimport { useImageGeneration } from '@/hooks/useImageGeneration';\n\nexport default function ChatPage() {\n  const { messages, loading, mode, toggleMode, startNewChat } = useChat();\n  const { sendMessage } = useTextChat();\n  const { generateImageFromPrompt } = useImageGeneration();\n  const [initialized, setInitialized] = useState(false);\n  \n  useEffect(() => {\n    // Set initialized after hooks are loaded\n    setInitialized(true);\n  }, []);\n  \n  const handleSendMessage = async (content: string) => {\n    if (mode === 'text') {\n      await sendMessage(content);\n    } else {\n      await generateImageFromPrompt(content);\n    }\n  };\n  \n  if (!initialized) {\n    return (\n      <div className=\"flex items-center justify-center h-screen\">\n        <div className=\"animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900\"></div>\n      </div>\n    );\n  }\n  \n  return (\n    <main className=\"flex flex-col h-screen bg-gray-50\">\n      <ChatLayout\n        messages={messages}\n        onSendMessage={handleSendMessage}\n        onNewChat={startNewChat}\n        loading={loading}\n        mode={mode}\n        onModeChange={toggleMode}\n      />\n    </main>\n  );\n}\n```\n\n2. Create a layout file in app/layout.tsx:\n```tsx\nimport './globals.css';\nimport type { Metadata } from 'next';\nimport { Inter } from 'next/font/google';\n\nconst inter = Inter({ subsets: ['latin'] });\n\nexport const metadata: Metadata = {\n  title: 'GPT-Powered Chatbot with Image Generation',\n  description: 'A chatbot application that enables conversations with OpenAI\\'s language models and generates images.',\n};\n\nexport default function RootLayout({\n  children,\n}: {\n  children: React.ReactNode;\n}) {\n  return (\n    <html lang=\"en\">\n      <body className={inter.className}>{children}</body>\n    </html>\n  );\n}\n```\n\n3. Create a global CSS file in app/globals.css:\n```css\n@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n:root {\n  --foreground-rgb: 0, 0, 0;\n  --background-rgb: 250, 250, 250;\n}\n\nbody {\n  color: rgb(var(--foreground-rgb));\n  background: rgb(var(--background-rgb));\n}\n\n/* Custom scrollbar */\n::-webkit-scrollbar {\n  width: 6px;\n}\n\n::-webkit-scrollbar-track {\n  background: transparent;\n}\n\n::-webkit-scrollbar-thumb {\n  background-color: rgba(0, 0, 0, 0.2);\n  border-radius: 3px;\n}\n\n/* Ensure full height layout */\nhtml, body {\n  height: 100%;\n  overflow: hidden;\n}\n```",
+        "testStrategy": "Test the complete user flow from opening the application to sending messages and generating images. Verify that mode switching works correctly. Test the new chat functionality. Check responsive design on different devices. Verify that all components integrate correctly and the application works as a cohesive whole.",
+        "priority": "high",
+        "dependencies": [
+          5,
+          6,
+          9,
+          10
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Page Layout and Component Integration",
+            "description": "Implement the main chat page layout and integrate all previously built components",
+            "dependencies": [],
+            "details": "1. Create the main page layout in app/page.tsx\n2. Import and integrate ChatLayout, MessageList, InputBar, and other components\n3. Implement responsive design for different screen sizes\n4. Ensure proper styling and layout consistency\n5. Set up the main container structure with appropriate grid/flex layouts",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Hook Integration and State Management",
+            "description": "Connect all hooks and implement state management for the chat functionality",
+            "dependencies": [
+              1
+            ],
+            "details": "1. Integrate useChat, useTextChat, and useImageGeneration hooks\n2. Set up state variables for messages, loading states, and current mode\n3. Implement proper state updates and data flow between components\n4. Handle state persistence and retrieval\n5. Ensure proper error handling for state management",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Message Handling Logic Based on Current Mode",
+            "description": "Implement conditional logic to handle messages differently based on text or image mode",
+            "dependencies": [
+              2
+            ],
+            "details": "1. Create conditional rendering for text vs image mode UI elements\n2. Implement message sending logic that routes to appropriate handler based on mode\n3. Set up proper message formatting for different types of content\n4. Implement mode-specific validation and error handling\n5. Ensure smooth transitions between modes",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Loading and Initialization States",
+            "description": "Implement loading states, initialization logic, and error handling for the chat interface",
+            "dependencies": [
+              3
+            ],
+            "details": "1. Create loading indicators for message sending and receiving\n2. Implement initialization sequence for the chat interface\n3. Add skeleton loaders for content that's being fetched\n4. Handle edge cases like network errors or API failures\n5. Implement graceful degradation for unsupported features",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "title": "Implement Error Handling and Loading States",
+        "description": "Add comprehensive error handling and loading state indicators throughout the application for a polished user experience.",
+        "details": "1. Create a LoadingSpinner component:\n```tsx\n// components/ui/LoadingSpinner.tsx\nexport default function LoadingSpinner({ size = 'medium' }: { size?: 'small' | 'medium' | 'large' }) {\n  const sizeClasses = {\n    small: 'h-4 w-4 border-2',\n    medium: 'h-8 w-8 border-2',\n    large: 'h-12 w-12 border-3',\n  };\n  \n  return (\n    <div className=\"flex justify-center items-center\">\n      <div className={`animate-spin rounded-full ${sizeClasses[size]} border-t-blue-500 border-blue-200`}></div>\n    </div>\n  );\n}\n```\n\n2. Create an ErrorMessage component:\n```tsx\n// components/ui/ErrorMessage.tsx\nimport { AlertCircle } from 'lucide-react';\n\ninterface ErrorMessageProps {\n  message: string;\n  retry?: () => void;\n}\n\nexport default function ErrorMessage({ message, retry }: ErrorMessageProps) {\n  return (\n    <div className=\"bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative\" role=\"alert\">\n      <div className=\"flex items-center\">\n        <AlertCircle className=\"h-5 w-5 mr-2\" />\n        <span>{message}</span>\n      </div>\n      {retry && (\n        <button\n          onClick={retry}\n          className=\"mt-2 bg-red-100 hover:bg-red-200 text-red-700 font-semibold py-1 px-3 rounded text-sm\"\n        >\n          Try Again\n        </button>\n      )}\n    </div>\n  );\n}\n```\n\n3. Update the ChatContainer component to handle errors and loading states:\n```tsx\n// components/chat/ChatContainer.tsx\nimport { useEffect, useRef } from 'react';\nimport { ChatMessage } from '@/types/database';\nimport MessageBubble from './MessageBubble';\nimport LoadingSpinner from '@/components/ui/LoadingSpinner';\nimport ErrorMessage from '@/components/ui/ErrorMessage';\n\ninterface ChatContainerProps {\n  messages: ChatMessage[];\n  loading: boolean;\n  error?: string;\n  onRetry?: () => void;\n}\n\nexport default function ChatContainer({ messages, loading, error, onRetry }: ChatContainerProps) {\n  const messagesEndRef = useRef<HTMLDivElement>(null);\n  \n  useEffect(() => {\n    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });\n  }, [messages, loading, error]);\n\n  return (\n    <div className=\"flex-1 overflow-y-auto p-4 space-y-4\">\n      {messages.length === 0 && !loading && !error && (\n        <div className=\"flex flex-col items-center justify-center h-full text-gray-500\">\n          <p className=\"text-xl font-semibold\">Start a conversation</p>\n          <p className=\"text-sm\">Ask a question or request an image</p>\n        </div>\n      )}\n      \n      {messages.map((message) => (\n        <MessageBubble key={message.id} message={message} />\n      ))}\n      \n      {loading && (\n        <div className=\"flex justify-center py-4\">\n          <LoadingSpinner />\n        </div>\n      )}\n      \n      {error && (\n        <ErrorMessage message={error} retry={onRetry} />\n      )}\n      \n      <div ref={messagesEndRef} />\n    </div>\n  );\n}\n```\n\n4. Update the hooks to handle and propagate errors:\n```typescript\n// hooks/useChat.ts (add error state)\nexport function useChat() {\n  // ... existing code\n  const [error, setError] = useState<string | null>(null);\n  \n  // Clear error when starting actions\n  const clearError = useCallback(() => {\n    setError(null);\n  }, []);\n  \n  // ... update other functions to use setError\n  \n  return {\n    // ... existing returns\n    error,\n    setError,\n    clearError\n  };\n}\n```\n\n5. Add error boundaries for component-level error handling:\n```tsx\n// components/ErrorBoundary.tsx\n'use client';\n\nimport { Component, ErrorInfo, ReactNode } from 'react';\nimport ErrorMessage from '@/components/ui/ErrorMessage';\n\ninterface Props {\n  children: ReactNode;\n  fallback?: ReactNode;\n}\n\ninterface State {\n  hasError: boolean;\n  error: Error | null;\n}\n\nexport default class ErrorBoundary extends Component<Props, State> {\n  constructor(props: Props) {\n    super(props);\n    this.state = { hasError: false, error: null };\n  }\n\n  static getDerivedStateFromError(error: Error): State {\n    return { hasError: true, error };\n  }\n\n  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {\n    console.error('Error caught by boundary:', error, errorInfo);\n  }\n\n  render() {\n    if (this.state.hasError) {\n      if (this.props.fallback) {\n        return this.props.fallback;\n      }\n      \n      return (\n        <div className=\"p-4\">\n          <ErrorMessage \n            message=\"Something went wrong. Please try refreshing the page.\"\n            retry={() => window.location.reload()}\n          />\n        </div>\n      );\n    }\n\n    return this.props.children;\n  }\n}\n```\n\n6. Wrap the main application with the error boundary:\n```tsx\n// app/page.tsx\n'use client';\n\nimport ErrorBoundary from '@/components/ErrorBoundary';\n// ... other imports\n\nexport default function ChatPage() {\n  // ... existing code\n  \n  return (\n    <ErrorBoundary>\n      <main className=\"flex flex-col h-screen bg-gray-50\">\n        {/* ... existing content */}\n      </main>\n    </ErrorBoundary>\n  );\n}\n```",
+        "testStrategy": "Test error handling by simulating various error conditions (API failures, network issues, invalid inputs). Verify that appropriate error messages are displayed. Test loading states by simulating slow responses and checking that loading indicators appear. Test error recovery by using retry functionality. Verify that the application gracefully handles unexpected errors through the error boundary.",
+        "priority": "medium",
+        "dependencies": [
+          9,
+          10,
+          11
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Loading Indicator Components",
+            "description": "Develop reusable UI components for displaying loading states throughout the application",
+            "dependencies": [],
+            "details": "Implement a LoadingSpinner component with size variants (small, medium, large). Create a LoadingOverlay for full-screen loading states. Add a MessageSkeleton component for chat loading states. Implement a LoadingButton component that shows loading state while actions are processing. Document usage patterns for each loading component.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Develop Error Message Components",
+            "description": "Create standardized error message components with retry functionality",
+            "dependencies": [
+              1
+            ],
+            "details": "Build an ErrorMessage component that displays user-friendly error text. Implement a RetryButton component that allows users to retry failed operations. Create an ApiErrorDisplay component for handling API-specific errors. Add a ToastNotification system for non-blocking error messages. Include clear error recovery instructions in all error states.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Implement Error Boundaries",
+            "description": "Add React Error Boundaries to catch and handle component-level errors",
+            "dependencies": [
+              2
+            ],
+            "details": "Create a global ErrorBoundary component to catch unhandled errors. Implement section-specific error boundaries for chat, image generation, and settings areas. Add fallback UI components that display when errors occur. Create a mechanism to log errors to a monitoring service. Implement recovery options within error boundary fallback components.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Update Hooks with Error Handling",
+            "description": "Enhance existing hooks with comprehensive error handling patterns",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Refactor useChat hook to handle and categorize different error types. Update useImageGeneration hook with proper error states and retry logic. Implement consistent loading state management across all hooks. Add error context providers for application-wide error state. Create utility functions for common error handling patterns.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Create Integration Tests for Error Scenarios",
+            "description": "Develop tests that verify error handling and loading states work correctly",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "Write tests that simulate network failures and verify error components appear. Create tests for API timeout scenarios and loading state transitions. Test error recovery flows including retry functionality. Implement visual regression tests for error and loading UI components. Create end-to-end tests that verify the complete error handling experience.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "created": "2025-07-13T19:21:19.706Z",
+      "updated": "2025-07-13T19:21:19.706Z",
+      "description": "Tasks for master context"
+    }
+  }
+}
